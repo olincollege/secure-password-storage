@@ -29,8 +29,7 @@ ENV CONTAINER_HOME=$CONTAINER_HOME
 # # $CONTAINER_HOME
 
 # COPY $PLAYBOOK /ansible/server_setup.yml
-# COPY /home/$HOST_USER/.ssh/authorized_keys $HOME/.ssh/authorized_keys
-RUN echo /home/$HOST_USER/.ssh/authorized_keys
-COPY /home/$HOST_USER/.ssh/authorized_keys .
+RUN echo $HOME/.ssh/authorized_keys
+COPY keys/authorized_keys $HOME/.ssh/authorized_keys
 
 # RUN ansible-playbook /ansible/main.yml
