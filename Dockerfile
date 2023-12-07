@@ -10,7 +10,6 @@ ENV CONTAINER_HOME=$CONTAINER_HOME
 
 # Install base dependencies
 RUN apt-get update && apt-get install sudo
-# RUN apt-get update && apt-get install apt-utils
 RUN apt-get update && apt-get install -y ansible
 # RUN apt-get update && apt-get install -y python3-pip
 # RUN pip3 --no-cache-dir install --upgrade awscli
@@ -29,7 +28,7 @@ WORKDIR /home/admin/
 # $HOME
 # $CONTAINER_HOME
 
-COPY PLAYBOOK /ansible/server_setup.yml
+COPY $PLAYBOOK /ansible/server_setup.yml
 COPY /home/$HOST_USER/.ssh/authorized_keys $HOME/.ssh/authorized_keys
 
 # RUN ansible-playbook /ansible/main.yml
