@@ -8,7 +8,16 @@
 # inotify-tools
 PASSWORDS_PATH=./passwords/
 
-inotifywait -e close_write,moved_to,create -m ${PASSWORDS_PATH} |
-    while read -r directory events filename; do
-        echo "working"
-    done
+monitor_directory() {
+    inotifywait -e close_write,moved_to,create -m ${PASSWORDS_PATH} |
+        while read -r directory events filename; do
+            push_files
+        done
+}
+
+push_files() {
+    echo "working!"
+
+}
+
+monitor_directory
