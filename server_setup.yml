@@ -1,10 +1,18 @@
 ---
-- name: Create git server
+
+
+- name: Install git & create git server
   hosts: 10.26.92.128
   remote_user: noname
   become: yes
 
     tasks:
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+
     - name: Create git user
       user:
         name: git
