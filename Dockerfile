@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y ansible
 USER $ADMIN
 RUN echo $ADMIN >&2
 RUN echo $HOME >&2
-WORKDIR $HOME
+WORKDIR "$HOME"
 # /home/admin/
 
 COPY PLAYBOOK /ansible/server_setup.yml
