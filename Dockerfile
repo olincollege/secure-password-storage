@@ -7,16 +7,15 @@ ARG HOST_USER=$USER
 ENV HOST_USER=$HOST_USER
 
 # Setup admin user
-RUN adduser --gecos "" $ADMIN
+RUN adduser --gecos "" $admin
 RUN passwd -d $ADMIN
 RUN usermod -aG sudo $ADMIN
 
 # Install base dependencies
 RUN apt-get update && apt-get install sudo
 RUN apt-get update && apt-get install -y ansible
-RUN $'apt-get update && \n\
-    apt-get install -y python3-pip && \n\
-    pip3 --no-cache-dir install --upgrade awscli'
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 --no-cache-dir install --upgrade awscli
 
 # Switch to admin user
 USER $ADMIN
