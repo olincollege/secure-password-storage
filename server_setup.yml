@@ -9,18 +9,18 @@
       user:
         name: git
 
-    - name: Upload public SSH key to "git" user
-      authorized_key:
-        user: git
-        key: "{{ lookup('file', '~/.ssh/key.pub') }}" # need to create key on the server & replace this path with that later
-        state: present
+    # - name: Upload public SSH key to "git" user
+    #   authorized_key:
+    #     user: git
+    #     key: "{{ lookup('file', '~/.ssh/key.pub') }}" # need to create key on the server & replace this path with that later
+    #     state: present
 
-    - name: Set permissions on ~/.ssh directory
-      file:
-        path: "/home/git/.ssh"
-        state: directory
-        mode: "0700"
-      become_user: git
+    # - name: Set permissions on ~/.ssh directory
+    #   file:
+    #     path: "/home/git/.ssh"
+    #     state: directory
+    #     mode: "0700"
+    #   become_user: git
 
       # might need to add something to to ensure "git" can authenticate via ssh
 

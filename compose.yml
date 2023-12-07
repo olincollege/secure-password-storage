@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  secure_password_storage:
+    image: secure-password-storage-test00:latest
+    container_name: secure_password_storage
+    ports:
+      - 2222:22

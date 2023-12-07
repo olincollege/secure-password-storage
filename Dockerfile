@@ -24,12 +24,15 @@ USER $ADMIN
 RUN echo $ADMIN >&2
 RUN echo $HOME >&2
 RUN echo $CONTAINER_HOME >&2
-WORKDIR /home/admin/secure-password-storage
+WORKDIR /home/admin/
 # $HOME
 # $CONTAINER_HOME
 
+# Copy ansibple playbook and ssh keys
 COPY $PLAYBOOK /ansible/server_setup.yml
 RUN echo $HOME/.ssh/authorized_keys
 COPY keys/authorized_keys $HOME/.ssh/authorized_keys
+
+EXPOSE 22
 
 # RUN ansible-playbook /ansible/main.yml
