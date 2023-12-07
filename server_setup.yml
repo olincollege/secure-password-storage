@@ -7,6 +7,11 @@
   become: yes
 
     tasks:
+    - name: Install openssh-server
+      apt:
+        name: ssh
+        state: started
+        
     - name: Install git
       apt:
         name: git
