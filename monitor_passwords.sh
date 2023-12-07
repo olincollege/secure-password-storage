@@ -6,9 +6,9 @@
 
 # dependencies:
 # inotify-tools
-PASSWORDS_PATH=/home/drew/Desktop/Passwords.kdbx
+# PASSWORDS_PATH=./
 
-inotifywait -m -e close_write "${PASSWORDS_PATH}" |
-    while read -r filename event; do
+inotifywait -e close_write,moved_to,create -m . |
+    while read -r directory events filename; do
         echo "working"
     done
