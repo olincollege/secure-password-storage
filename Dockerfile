@@ -25,8 +25,9 @@ USER $ADMIN
 RUN echo $ADMIN >&2
 RUN echo $HOME >&2
 RUN echo $CONTAINER_HOME >&2
-WORKDIR $CONTAINER_HOME
-# /home/admin/
+WORKDIR /home/admin/
+# $HOME
+# $CONTAINER_HOME
 
 COPY PLAYBOOK /ansible/server_setup.yml
 COPY /home/$HOST_USER/.ssh/authorized_keys $HOME/.ssh/authorized_keys
