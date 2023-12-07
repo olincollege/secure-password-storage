@@ -6,9 +6,9 @@
 
 # dependencies:
 # inotify-tools
-# PASSWORDS_PATH=./
+PASSWORDS_PATH=./passwords/
 
-inotifywait -e close_write,moved_to,create -m . |
+inotifywait -e close_write,moved_to,create -m ${PASSWORDS_PATH} |
     while read -r directory events filename; do
         echo "working"
     done
