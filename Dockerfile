@@ -7,7 +7,7 @@ ARG HOST_USER=$USER
 ENV HOST_USER=$HOST_USER
 
 # Setup admin user
-RUN adduser --gecos "" $admin
+RUN adduser --gecos "" $ADMIN
 RUN passwd -d $ADMIN
 RUN usermod -aG sudo $ADMIN
 
