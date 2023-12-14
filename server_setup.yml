@@ -1,17 +1,18 @@
 ---
-
-
 - name: Install git & create git server
-  hosts: 10.26.92.128
-  remote_user: noname
+  hosts: 127.0.0.1
+  connection: local
+  module_defaults:
+    shell:
+      chdir: ${HOME}
+  # remote_user: noname
   become: yes
-
-    tasks:
+  tasks:
     - name: Install openssh-server
       apt:
         name: ssh
         state: started
-        
+
     - name: Install git
       apt:
         name: git
@@ -35,7 +36,7 @@
     #     mode: "0700"
     #   become_user: git
 
-      # might need to add something to to ensure "git" can authenticate via ssh
+    # might need to add something to to ensure "git" can authenticate via ssh
 
     - name: Create a bare repository on the server
       command: git init --bare
