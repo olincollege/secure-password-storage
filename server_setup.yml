@@ -11,12 +11,12 @@
     - name: Install openssh-server
       apt:
         name: ssh
-        state: started
+        state: latest
 
     - name: Install git
       apt:
         name: git
-        state: present
+        state: latest
         update_cache: yes
 
     - name: Create git user
