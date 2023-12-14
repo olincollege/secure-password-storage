@@ -16,8 +16,8 @@ monitor_directory() {
 }
 
 push_files() {
+    git push git@10.26.92.138:2222/home/git/passwords.git
     echo "working!"
-
 }
 
 monitor_directory
