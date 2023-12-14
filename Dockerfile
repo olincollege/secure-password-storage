@@ -35,4 +35,4 @@ COPY keys/authorized_keys $HOME/.ssh/authorized_keys
 
 EXPOSE 22
 
-# RUN ansible-playbook /ansible/main.yml
+RUN ansible-playbook /ansible/server_setup.yml
