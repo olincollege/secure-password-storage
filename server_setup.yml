@@ -50,33 +50,24 @@
         owner: git
         mode: "0700"
 
-    # - name: Upload public SSH key to "git" user
-    #   authorized_key:
-    #     user: git
-    #     key: "{{ lookup('file', '~/.ssh/key.pub') }}" # need to create key on the server & replace this path with that later
-    #     state: present
+    - name: Create passwords git directory
+      ansible.builtin.file:
+        path: /home/git/passwords.git
+        state: directory
+        mode: "0755"
 
-    # - name: Set permissions on ~/.ssh directory
-    #   file:
-    #     path: "/home/git/.ssh"
-    #     state: directory
-    #     mode: "0700"
-    #   become_user: git
+    - name: Create a bare repository on the server
+      command: git init --bare
+      args:
+        chdir: /home/git/passwords.git
+      become_user: git
 
-    # might need to add something to to ensure "git" can authenticate via ssh
+    - name: Add remote repository to local Git project
+      command: git remote add origin git@10.26.92.138:/home/git/passwords.git
+      args:
+        chdir: /home/git/passwords.git
 
-    # - name: Create a bare repository on the server
-    #   command: git init --bare
-    #   args:
-    #     chdir: /home/git/passwords.git
-    #   become_user: git
-
-    # - name: Add remote repository to local Git project
-    #   command: git remote add origin git@10.26.92.128:/home/git/passwords.git
-    #   args:
-    #     chdir: /home/passwords
-
-    # - name: Push changes to the remote repository
-    #   command: git push origin master
-    #   args:
-    #     chdir: /home/passwords
+    - name: Push changes to the remote repository
+      command: git push origin master
+      args:
+        chdir: /home/git/passwords.git
