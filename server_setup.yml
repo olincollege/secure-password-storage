@@ -1,6 +1,6 @@
 ---
 - name: Install git & create git server
-  hosts: 127.0.0.1
+  hosts: localhost
   connection: local
   module_defaults:
     shell:
@@ -19,11 +19,10 @@
         state: latest
         update_cache: yes
 
-    - name: Install ufw
-      apt:
-        name: ufw
-        state: latest
-        update_cache: yes
+    - name: Stop and start ssh
+      service:
+        name: ssh
+        state: restarted
 
     - name: Create git user
       user:
