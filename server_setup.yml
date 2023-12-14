@@ -1,6 +1,6 @@
 ---
 - name: Install git & create git server
-  hosts: localhost
+  hosts: 127.0.0.1
   connection: local
   module_defaults:
     shell:
@@ -19,10 +19,19 @@
         state: latest
         update_cache: yes
 
-    - name: Stop and start ssh
-      service:
-        name: ssh
-        state: restarted
+    - name: Check if ssh service exists
+      stat: path=/etc/init.d/ssh
+      register: service_status
+
+    - name: Stop ssh service
+      service: name=ssh state=stopped
+      when: service_status.stat.exists
+      register: service_stopped
+
+    - name: Start ssh service
+      service: name=ssh state=started
+      when: service_status.stat.exists
+      register: service_started
 
     - name: Create git user
       user:
