@@ -23,6 +23,13 @@
       user:
         name: git
 
+    - name: Copy ssh keys to git user
+      ansible.builtin.copy:
+        src: /.ssh/authorized_keys
+        dest: /home/git/.ssh/authorized_keys
+        owner: git
+        mode: "0700"
+
     # - name: Upload public SSH key to "git" user
     #   authorized_key:
     #     user: git
@@ -38,18 +45,18 @@
 
     # might need to add something to to ensure "git" can authenticate via ssh
 
-    - name: Create a bare repository on the server
-      command: git init --bare
-      args:
-        chdir: /home/git/passwords.git
-      become_user: git
+    # - name: Create a bare repository on the server
+    #   command: git init --bare
+    #   args:
+    #     chdir: /home/git/passwords.git
+    #   become_user: git
 
-    - name: Add remote repository to local Git project
-      command: git remote add origin git@10.26.92.128:/home/git/passwords.git
-      args:
-        chdir: /home/passwords
+    # - name: Add remote repository to local Git project
+    #   command: git remote add origin git@10.26.92.128:/home/git/passwords.git
+    #   args:
+    #     chdir: /home/passwords
 
-    - name: Push changes to the remote repository
-      command: git push origin master
-      args:
-        chdir: /home/passwords
+    # - name: Push changes to the remote repository
+    #   command: git push origin master
+    #   args:
+    #     chdir: /home/passwords
