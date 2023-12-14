@@ -60,10 +60,9 @@
       command: git init --bare
       args:
         chdir: /home/git/passwords.git
-      become_user: git
 
     - name: Add remote repository to local Git project
-      command: git remote add origin git@10.26.92.138:/home/git/passwords.git
+      command: git remote add origin git@10.26.92.138:2222/home/git/passwords.git
       args:
         chdir: /home/git/passwords.git
 
