@@ -19,13 +19,19 @@
         state: latest
         update_cache: yes
 
+    # - name: Install ufw
+    #   apt:
+    #     name: ufw
+    #     state: latest
+    #     update_cache: yes
+
     - name: Create git user
       user:
         name: git
 
     - name: Create ssh directory
       ansible.builtin.file:
-        path: /home/git/.ssh/
+        path: /home/git/.ssh
         state: directory
         mode: "0755"
 
