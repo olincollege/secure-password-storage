@@ -1,0 +1,40 @@
+# don't need to install git because we need the clients to have a
+# working git and have set up the credentials on their own
+# otherwise, there isn't a way to automatically get the ssh key
+# to the server
+
+# Ansible playbook for adding push and pull scripts to cronjobs
+# (for client) also install inotifytools
+
+---
+- name: Set up client device
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  vars:
+    # todo: change the repo path
+    git_repo_url: "https://github.com/your/repo.git"
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - inotify-tools
+
+    - name: Clone repo
+      git:
+        repo: "{{ git_repo_url }}"
+        dest: passwords
+
+    - name: Set up push cron job
+      cron:
+        name: "Run push_script.sh every 10 minutes"
+        job: "*/10 * * * * /Documents/secure-password-storage/push_script.sh"
+        state: present
+
+    - name: Set up pull cron job
+      cron:
+        name: "Run pull_script.sh every minute"
+        job: "*/1 * * * * /Documents/secure-password-storage/pull_script.sh"
+        state: present
